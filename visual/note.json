@@ -1,0 +1,566 @@
+{
+  "paragraphs": [
+    {
+      "text": "%python\nfrom pysqldf import SQLDF\nimport pandas as pd\n\nawc \u003d pd.read_csv(\"C:\\zeppelin-0.7.3-bin-all\\Ability_words_city.csv.\", sep\u003d\",\")\nawco \u003d pd.read_csv(\"C:\\zeppelin-0.7.3-bin-all\\Ability_words_company.csv.\", sep\u003d\",\")\nawj \u003d pd.read_csv(\"C:\\zeppelin-0.7.3-bin-all\\Ability_words_job.csv.\", sep\u003d\",\")\nplj \u003d pd.read_csv(\"C:\\zeppelin-0.7.3-bin-all\\Programming_job.csv.\", sep\u003d\",\")\nrwc \u003d pd.read_csv(\"C:\\zeppelin-0.7.3-bin-all\\Resume_words_city.csv.\", sep\u003d\",\")\nrwco \u003d pd.read_csv(\"C:\\zeppelin-0.7.3-bin-all\\Resume_words_company.csv.\", sep\u003d\",\")\nrwj \u003d pd.read_csv(\"C:\\zeppelin-0.7.3-bin-all\\Resume_words_job.csv.\", sep\u003d\",\")\ncity \u003d pd.read_csv(\"C:\\zeppelin-0.7.3-bin-all\\city_result.csv.\", sep\u003d\",\")\ncompany \u003d pd.read_csv(\"C:\\zeppelin-0.7.3-bin-all\\company_result.csv.\", sep\u003d\",\")\nstate \u003d pd.read_csv(\"C:\\zeppelin-0.7.3-bin-all\\state_result.csv.\", sep\u003d\",\")",
+      "user": "anonymous",
+      "dateUpdated": "Jun 14, 2018 4:27:35 PM",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1528954067864_-2080453314",
+      "id": "20180614-142747_2069180835",
+      "dateCreated": "Jun 14, 2018 2:27:47 PM",
+      "dateStarted": "Jun 14, 2018 4:27:35 PM",
+      "dateFinished": "Jun 14, 2018 4:27:36 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%python\ncity_2 \u003d pd.DataFrame(city, columns \u003d [\u0027city\u0027,\u0027frequency\u0027])\ncity_2 \u003d city_2.sort_values(\u0027frequency\u0027,ascending\u003dFalse)\ncity_2[\u0027frequency\u0027] \u003d city_2.groupby(\u0027city\u0027)[\u0027frequency\u0027].transform(\u0027sum\u0027)\ncity_2 \u003d city_2.drop_duplicates([\u0027city\u0027], keep\u003d\u0027first\u0027)\ncity_h \u003d city_2.head(10)\ncity_h \u003d pd.DataFrame(city_h, columns \u003d [\u0027city\u0027])\ncity \u003d pd.merge(city,city_h)\nz.show(city)",
+      "user": "anonymous",
+      "dateUpdated": "Jun 14, 2018 3:39:02 PM",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "multiBarChart",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "multiBarChart": {}
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "city",
+                  "index": 0.0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [
+                {
+                  "name": "job",
+                  "index": 1.0,
+                  "aggr": "sum"
+                }
+              ],
+              "values": [
+                {
+                  "name": "frequency",
+                  "index": 2.0,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "city\tjob\tfrequency\nPhoenix\tdatabase administrator\t201\nPhoenix\tbig data engineer\t144\nPhoenix\tsoftware embedded engineer\t31\nPhoenix\tdata analyst\t1006\nPhoenix\tdata engineer\t456\nPhoenix\tdeep learning engineer\t19\nPhoenix\tmachine learning engineer\t42\nPhoenix\tdata warehouse engineer\t10\nPhoenix\tsoftware engineer\t912\nPhoenix\tdatabase developer\t115\nPhoenix\tdata architect\t309\nPhoenix\tsoftware developer\t427\nSeattle\tdeep learning engineer\t356\nSeattle\tsoftware engineer\t679\nSeattle\tdata architect\t571\nSeattle\tsoftware developer\t2\nSeattle\tdata warehouse engineer\t82\nSeattle\tdatabase developer\t111\nSeattle\tmachine learning engineer\t579\nSeattle\tbig data engineer\t698\nSeattle\tdata analyst\t671\nSeattle\tdatabase administrator\t128\nSeattle\tsoftware embedded engineer\t118\nSeattle\tdata engineer\t957\nChicago\tdata architect\t756\nChicago\tdata warehouse engineer\t60\nChicago\tdatabase developer\t448\nChicago\tdeep learning engineer\t178\nChicago\tsoftware engineer\t834\nChicago\tmachine learning engineer\t232\nChicago\tsoftware developer\t794\nChicago\tsoftware embedded engineer\t46\nChicago\tbig data engineer\t407\nChicago\tdata engineer\t819\nChicago\tdatabase administrator\t211\nChicago\tdata analyst\t776\nSan Diego\tdatabase developer\t168\nSan Diego\tmachine learning engineer\t177\nSan Diego\tsoftware engineer\t847\nSan Diego\tdata warehouse engineer\t21\nSan Diego\tsoftware developer\t805\nSan Diego\tdeep learning engineer\t57\nSan Diego\tdata architect\t424\nSan Diego\tdatabase administrator\t268\nSan Diego\tsoftware embedded engineer\t146\nSan Diego\tbig data engineer\t246\nSan Diego\tdata engineer\t960\nSan Diego\tdata analyst\t1504\nAustin\tbig data engineer\t221\nAustin\tsoftware embedded engineer\t150\nAustin\tdatabase administrator\t156\nAustin\tdata engineer\t854\nAustin\tdata analyst\t847\nAustin\tsoftware developer\t902\nAustin\tdeep learning engineer\t132\nAustin\tdatabase developer\t285\nAustin\tdata warehouse engineer\t29\nAustin\tdata architect\t451\nAustin\tsoftware engineer\t884\nAustin\tmachine learning engineer\t152\nHouston\tsoftware developer\t858\nHouston\tdata architect\t345\nHouston\tsoftware engineer\t860\nHouston\tdatabase developer\t250\nHouston\tdata warehouse engineer\t39\nHouston\tdeep learning engineer\t46\nHouston\tmachine learning engineer\t209\nHouston\tsoftware embedded engineer\t44\nHouston\tdata analyst\t1762\nHouston\tbig data engineer\t202\nHouston\tdata engineer\t884\nHouston\tdatabase administrator\t275\nNew York\tdata architect\t1523\nNew York\tsoftware engineer\t837\nNew York\tdata warehouse engineer\t154\nNew York\tsoftware developer\t768\nNew York\tdeep learning engineer\t472\nNew York\tdatabase developer\t578\nNew York\tmachine learning engineer\t1507\nNew York\tdata analyst\t1735\nNew York\tdatabase administrator\t761\nNew York\tsoftware embedded engineer\t67\nNew York\tdata engineer\t989\nNew York\tbig data engineer\t1514\nDallas\tsoftware engineer\t402\nDallas\tmachine learning engineer\t138\nDallas\tdeep learning engineer\t43\nDallas\tdata warehouse engineer\t41\nDallas\tdata architect\t1091\nDallas\tdatabase developer\t215\nDallas\tsoftware developer\t358\nDallas\tdata analyst\t981\nDallas\tbig data engineer\t312\nDallas\tdata engineer\t565\nDallas\tsoftware embedded engineer\t36\nDallas\tdatabase administrator\t277\nInc.\tdata engineer\t3081\nInc.\tsoftware embedded engineer\t543\nInc.\tdata analyst\t2605\nInc.\tbig data engineer\t736\nInc.\tdatabase administrator\t809\nInc.\tmachine learning engineer\t626\nInc.\tdeep learning engineer\t208\nInc.\tsoftware engineer\t1756\nInc.\tsoftware developer\t609\nInc.\tdatabase developer\t325\nInc.\tdata warehouse engineer\t132\nInc.\tdata architect\t1296\nSan Francisco\tsoftware engineer\t796\nSan Francisco\tdata warehouse engineer\t161\nSan Francisco\tdatabase developer\t367\nSan Francisco\tdata architect\t1224\nSan Francisco\tmachine learning engineer\t678\nSan Francisco\tsoftware developer\t731\nSan Francisco\tdeep learning engineer\t477\nSan Francisco\tdata engineer\t736\nSan Francisco\tsoftware embedded engineer\t151\nSan Francisco\tdatabase administrator\t280\nSan Francisco\tbig data engineer\t620\nSan Francisco\tdata analyst\t679\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1528955879263_391560014",
+      "id": "20180614-145759_181841080",
+      "dateCreated": "Jun 14, 2018 2:57:59 PM",
+      "dateStarted": "Jun 14, 2018 3:38:44 PM",
+      "dateFinished": "Jun 14, 2018 3:38:44 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%python\ncompany_2 \u003d pd.DataFrame(company, columns \u003d [\u0027company\u0027,\u0027frequency\u0027])\ncompany_2 \u003d company_2.sort_values(\u0027frequency\u0027,ascending\u003dFalse)\ncompany_2[\u0027frequency\u0027] \u003d company_2.groupby(\u0027company\u0027)[\u0027frequency\u0027].transform(\u0027sum\u0027)\ncompany_2 \u003d company_2.drop_duplicates([\u0027company\u0027], keep\u003d\u0027first\u0027)\ncompany_h \u003d company_2.head(10)\ncompany_h \u003d pd.DataFrame(company_h, columns \u003d [\u0027company\u0027])\ncompany \u003d pd.merge(company,company_h)\nz.show(company)",
+      "user": "anonymous",
+      "dateUpdated": "Jun 14, 2018 3:42:15 PM",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "multiBarChart",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "multiBarChart": {}
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "company",
+                  "index": 0.0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [
+                {
+                  "name": "job",
+                  "index": 1.0,
+                  "aggr": "sum"
+                }
+              ],
+              "values": [
+                {
+                  "name": "frequency",
+                  "index": 2.0,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "company\tjob\tfrequency\nGoldman Sachs\tdatabase developer\t22\nGoldman Sachs\tsoftware developer\t82\nGoldman Sachs\tdata architect\t471\nGoldman Sachs\tsoftware engineer\t60\nGoldman Sachs\tdata warehouse engineer\t2\nGoldman Sachs\tdeep learning engineer\t40\nGoldman Sachs\tmachine learning engineer\t551\nGoldman Sachs\tbig data engineer\t413\nGoldman Sachs\tdata analyst\t113\nGoldman Sachs\tdatabase administrator\t1\nGoldman Sachs\tsoftware embedded engineer\t3\nGoldman Sachs\tdata engineer\t225\nApple\tdata warehouse engineer\t3\nApple\tsoftware engineer\t264\nApple\tdata architect\t142\nApple\tdatabase developer\t44\nApple\tdeep learning engineer\t114\nApple\tmachine learning engineer\t375\nApple\tsoftware developer\t144\nApple\tbig data engineer\t297\nApple\tdata engineer\t240\nApple\tdata analyst\t240\nApple\tsoftware embedded engineer\t120\nApple\tdatabase administrator\t16\nRaytheon\tdatabase administrator\t26\nRaytheon\tdata analyst\t144\nRaytheon\tbig data engineer\t29\nRaytheon\tsoftware embedded engineer\t158\nRaytheon\tdata engineer\t460\nRaytheon\tdata warehouse engineer\t1\nRaytheon\tmachine learning engineer\t26\nRaytheon\tdeep learning engineer\t4\nRaytheon\tdatabase developer\t2\nRaytheon\tsoftware engineer\t303\nRaytheon\tsoftware developer\t42\nRaytheon\tdata architect\t119\nIntel\tdata architect\t104\nIntel\tdeep learning engineer\t34\nIntel\tsoftware engineer\t269\nIntel\tsoftware developer\t24\nIntel\tmachine learning engineer\t56\nIntel\tsoftware embedded engineer\t37\nIntel\tbig data engineer\t41\nIntel\tdata analyst\t34\nIntel\tdata engineer\t153\nIntel\tdatabase administrator\t1\nNorthrop Grumman\tmachine learning engineer\t10\nNorthrop Grumman\tdatabase developer\t3\nNorthrop Grumman\tsoftware engineer\t164\nNorthrop Grumman\tdata architect\t45\nNorthrop Grumman\tsoftware developer\t30\nNorthrop Grumman\tdata engineer\t266\nNorthrop Grumman\tbig data engineer\t22\nNorthrop Grumman\tdata analyst\t190\nNorthrop Grumman\tdatabase administrator\t36\nNorthrop Grumman\tsoftware embedded engineer\t70\nUnitedHealth Group\tdata engineer\t114\nUnitedHealth Group\tdata analyst\t312\nUnitedHealth Group\tbig data engineer\t51\nUnitedHealth Group\tdatabase administrator\t25\nUnitedHealth Group\tdata warehouse engineer\t1\nUnitedHealth Group\tmachine learning engineer\t16\nUnitedHealth Group\tdatabase developer\t19\nUnitedHealth Group\tsoftware engineer\t64\nUnitedHealth Group\tdeep learning engineer\t1\nUnitedHealth Group\tdata architect\t130\nUnitedHealth Group\tsoftware developer\t23\nLOCKHEED MARTIN CORPORATION\tdatabase developer\t7\nLOCKHEED MARTIN CORPORATION\tdata warehouse engineer\t4\nLOCKHEED MARTIN CORPORATION\tsoftware engineer\t287\nLOCKHEED MARTIN CORPORATION\tmachine learning engineer\t25\nLOCKHEED MARTIN CORPORATION\tsoftware developer\t53\nLOCKHEED MARTIN CORPORATION\tdeep learning engineer\t6\nLOCKHEED MARTIN CORPORATION\tdata architect\t30\nLOCKHEED MARTIN CORPORATION\tdatabase administrator\t46\nLOCKHEED MARTIN CORPORATION\tsoftware embedded engineer\t135\nLOCKHEED MARTIN CORPORATION\tbig data engineer\t31\nLOCKHEED MARTIN CORPORATION\tdata engineer\t454\nLOCKHEED MARTIN CORPORATION\tdata analyst\t200\nJP Morgan Chase\tmachine learning engineer\t560\nJP Morgan Chase\tdeep learning engineer\t171\nJP Morgan Chase\tdatabase developer\t76\nJP Morgan Chase\tsoftware developer\t306\nJP Morgan Chase\tdata architect\t107\nJP Morgan Chase\tsoftware engineer\t369\nJP Morgan Chase\tdata warehouse engineer\t20\nJP Morgan Chase\tdatabase administrator\t37\nJP Morgan Chase\tdata analyst\t323\nJP Morgan Chase\tsoftware embedded engineer\t3\nJP Morgan Chase\tdata engineer\t463\nJP Morgan Chase\tbig data engineer\t335\nAmazon.com\tmachine learning engineer\t603\nAmazon.com\tdatabase developer\t134\nAmazon.com\tsoftware developer\t113\nAmazon.com\tdeep learning engineer\t340\nAmazon.com\tdata architect\t572\nAmazon.com\tsoftware engineer\t332\nAmazon.com\tdata warehouse engineer\t66\nAmazon.com\tsoftware embedded engineer\t139\nAmazon.com\tdata analyst\t229\nAmazon.com\tdatabase administrator\t124\nAmazon.com\tbig data engineer\t587\nAmazon.com\tdata engineer\t690\nGoogle\tdata warehouse engineer\t9\nGoogle\tsoftware engineer\t242\nGoogle\tdata architect\t201\nGoogle\tdeep learning engineer\t54\nGoogle\tdatabase developer\t58\nGoogle\tsoftware developer\t166\nGoogle\tmachine learning engineer\t270\nGoogle\tsoftware embedded engineer\t102\nGoogle\tbig data engineer\t459\nGoogle\tdatabase administrator\t5\nGoogle\tdata analyst\t245\nGoogle\tdata engineer\t413\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1528957375901_-281821725",
+      "id": "20180614-152255_1456883386",
+      "dateCreated": "Jun 14, 2018 3:22:55 PM",
+      "dateStarted": "Jun 14, 2018 3:40:19 PM",
+      "dateFinished": "Jun 14, 2018 3:40:19 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%python\nstate_2 \u003d pd.DataFrame(state, columns \u003d [\u0027state\u0027,\u0027frequency\u0027])\nstate_2 \u003d state_2.sort_values(\u0027frequency\u0027,ascending\u003dFalse)\nstate_2[\u0027frequency\u0027] \u003d state_2.groupby(\u0027state\u0027)[\u0027frequency\u0027].transform(\u0027sum\u0027)\nstate_2 \u003d state_2.drop_duplicates([\u0027state\u0027], keep\u003d\u0027first\u0027)\nstate_h \u003d state_2.head(10)\nstate_h \u003d pd.DataFrame(state_h, columns \u003d [\u0027state\u0027])\nstate \u003d pd.merge(state,state_h)\nz.show(state)",
+      "user": "anonymous",
+      "dateUpdated": "Jun 14, 2018 3:42:05 PM",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "multiBarChart",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "multiBarChart": {}
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "state",
+                  "index": 0.0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [
+                {
+                  "name": "job",
+                  "index": 1.0,
+                  "aggr": "sum"
+                }
+              ],
+              "values": [
+                {
+                  "name": "frequency",
+                  "index": 2.0,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "state\tjob\tfrequency\nWA\tbig data engineer\t1044\nWA\tdatabase administrator\t301\nWA\tdata engineer\t1787\nWA\tsoftware embedded engineer\t315\nWA\tdata analyst\t1347\nWA\tsoftware engineer\t984\nWA\tdeep learning engineer\t565\nWA\tdatabase developer\t165\nWA\tdata warehouse engineer\t136\nWA\tsoftware developer\t2\nWA\tmachine learning engineer\t903\nWA\tdata architect\t1002\nCA\tbig data engineer\t3960\nCA\tdata engineer\t7539\nCA\tsoftware embedded engineer\t1904\nCA\tdata analyst\t9268\nCA\tdatabase administrator\t2473\nCA\tdata architect\t6184\nCA\tsoftware engineer\t5336\nCA\tdatabase developer\t1828\nCA\tmachine learning engineer\t3605\nCA\tsoftware developer\t3587\nCA\tdata warehouse engineer\t567\nCA\tdeep learning engineer\t1889\nNC\tsoftware engineer\t1443\nNC\tdata architect\t592\nNC\tsoftware developer\t40\nNC\tmachine learning engineer\t134\nNC\tdeep learning engineer\t79\nNC\tdatabase developer\t280\nNC\tdata warehouse engineer\t60\nNC\tdata engineer\t1840\nNC\tdata analyst\t1923\nNC\tsoftware embedded engineer\t83\nNC\tbig data engineer\t332\nNC\tdatabase administrator\t301\nNY\tmachine learning engineer\t1585\nNY\tdeep learning engineer\t502\nNY\tdata architect\t1738\nNY\tdatabase developer\t684\nNY\tsoftware engineer\t898\nNY\tsoftware developer\t836\nNY\tdata warehouse engineer\t177\nNY\tbig data engineer\t1589\nNY\tdata engineer\t1657\nNY\tsoftware embedded engineer\t163\nNY\tdatabase administrator\t1024\nNY\tdata analyst\t2400\nTX\tbig data engineer\t1261\nTX\tdata engineer\t4428\nTX\tdatabase administrator\t1400\nTX\tdata analyst\t6238\nTX\tsoftware embedded engineer\t396\nTX\tdatabase developer\t1328\nTX\tmachine learning engineer\t786\nTX\tdata warehouse engineer\t169\nTX\tdata architect\t3213\nTX\tsoftware engineer\t4396\nTX\tsoftware developer\t3109\nTX\tdeep learning engineer\t317\nIL\tdeep learning engineer\t192\nIL\tdatabase developer\t586\nIL\tmachine learning engineer\t282\nIL\tdata architect\t1023\nIL\tsoftware developer\t933\nIL\tdata warehouse engineer\t90\nIL\tsoftware engineer\t946\nIL\tsoftware embedded engineer\t137\nIL\tdatabase administrator\t446\nIL\tdata analyst\t1820\nIL\tdata engineer\t1624\nIL\tbig data engineer\t505\nCO\tdata engineer\t1577\nCO\tsoftware embedded engineer\t146\nCO\tdatabase administrator\t450\nCO\tdata analyst\t1191\nCO\tbig data engineer\t253\nCO\tdata architect\t901\nCO\tsoftware developer\t1\nCO\tdata warehouse engineer\t45\nCO\tmachine learning engineer\t118\nCO\tdeep learning engineer\t78\nCO\tsoftware engineer\t1404\nAZ\tsoftware developer\t894\nAZ\tdata architect\t593\nAZ\tsoftware engineer\t2182\nAZ\tmachine learning engineer\t111\nAZ\tdata warehouse engineer\t35\nAZ\tdatabase developer\t287\nAZ\tdeep learning engineer\t30\nAZ\tsoftware embedded engineer\t136\nAZ\tdatabase administrator\t382\nAZ\tdata analyst\t2069\nAZ\tdata engineer\t1268\nAZ\tbig data engineer\t304\nOH\tdatabase developer\t149\nOH\tdata warehouse engineer\t47\nOH\tsoftware developer\t535\nOH\tsoftware engineer\t883\nOH\tdeep learning engineer\t90\nOH\tmachine learning engineer\t189\nOH\tdata architect\t427\nOH\tbig data engineer\t236\nOH\tdata engineer\t1733\nOH\tsoftware embedded engineer\t134\nOH\tdata analyst\t1639\nOH\tdatabase administrator\t229\nFL\tdata analyst\t2569\nFL\tsoftware embedded engineer\t147\nFL\tbig data engineer\t205\nFL\tdata engineer\t1745\nFL\tdatabase administrator\t432\nFL\tsoftware engineer\t454\nFL\tmachine learning engineer\t91\nFL\tdata warehouse engineer\t51\nFL\tdatabase developer\t81\nFL\tdeep learning engineer\t64\nFL\tsoftware developer\t192\nFL\tdata architect\t592\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1528957396160_1447285805",
+      "id": "20180614-152316_971567675",
+      "dateCreated": "Jun 14, 2018 3:23:16 PM",
+      "dateStarted": "Jun 14, 2018 3:41:50 PM",
+      "dateFinished": "Jun 14, 2018 3:41:50 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%python\nawco_2 \u003d pd.DataFrame(awco, columns \u003d [\u0027col_index\u0027,\u0027frequency\u0027])\nawco_2 \u003d awco_2.sort_values(\u0027frequency\u0027,ascending\u003dFalse)\nawco_2[\u0027frequency\u0027] \u003d awco_2.groupby(\u0027col_index\u0027)[\u0027frequency\u0027].transform(\u0027sum\u0027)\nawco_2 \u003d awco_2.drop_duplicates([\u0027col_index\u0027], keep\u003d\u0027first\u0027)\nawco_h \u003d awco_2.head(10)\nawco_h \u003d pd.DataFrame(awco_h, columns \u003d [\u0027col_index\u0027])\nawco \u003d pd.merge(awco,awco_h)\nawco[\u0027new_result\u0027] \u003d awco[\u0027result\u0027] / awco[\u0027frequency\u0027]\nz.show(awco)",
+      "user": "anonymous",
+      "dateUpdated": "Jun 14, 2018 3:52:08 PM",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "multiBarChart",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "multiBarChart": {}
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "col_index",
+                  "index": 0.0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [
+                {
+                  "name": "word",
+                  "index": 1.0,
+                  "aggr": "sum"
+                }
+              ],
+              "values": [
+                {
+                  "name": "new_result",
+                  "index": 5.0,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "col_index\tword\tfrequency\tscore\tresult\tnew_result\nAccenture\tart\t13\t0\t8.996619047619047\t0.692047619047619\nAccenture\tcompetence\t9\t0\t-6.118777056277058\t-0.6798641173641176\nAccenture\tcompetency\t9\t0\t-6.118777056277058\t-0.6798641173641176\nAccenture\tfunction\t6\t0\t-5.0447770562770575\t-0.8407961760461763\nAccenture\tproficiency\t1\t0\t0.27018849206349205\t0.27018849206349205\nAccenture\tqualification\t13\t0\t1.076190476190476\t0.08278388278388277\nAccenture\tresourcefulness\t1\t0\t0.25\t0.25\nAccenture\tskill\t20\t0\t8.45129254079254\t0.422564627039627\nAccenture\ttalent\t2\t0\t0.475\t0.2375\nAccenture\tunderstanding\t5\t0\t5.703571428571428\t1.1407142857142856\nAmazon.com\tart\t20\t0\t2.481738095238096\t0.1240869047619048\nAmazon.com\tcapacity\t2\t0\t0.0\t0.0\nAmazon.com\tdynamism\t13\t0\t0.09375000000000004\t0.0072115384615384645\nAmazon.com\teffectiveness\t2\t0\t0.6404761904761905\t0.32023809523809527\nAmazon.com\tefficiency\t5\t0\t2.7946428571428568\t0.5589285714285713\nAmazon.com\tfacility\t3\t0\t4.048611111111111\t1.349537037037037\nAmazon.com\tfunction\t5\t0\t-0.001465201465201349\t-0.0002930402930402698\nAmazon.com\tintelligence\t1\t0\t0.0\t0.0\nAmazon.com\tmight\t3\t0\t0.375\t0.125\nAmazon.com\tpotential\t1\t0\t-0.0625\t-0.0625\nAmazon.com\tpotentiality\t1\t0\t-0.0625\t-0.0625\nAmazon.com\tproficiency\t7\t0\t2.812519771894772\t0.4017885388421103\nAmazon.com\tresourcefulness\t3\t0\t1.4675595238095238\t0.4891865079365079\nAmazon.com\tskill\t7\t0\t0.0758928571428572\t0.010841836734693886\nAmazon.com\tstrength\t1\t0\t0.6\t0.6\nAmazon.com\tunderstanding\t7\t0\t2.1635416666666667\t0.30907738095238096\nCiti\tart\t12\t0\t1.4193452380952378\t0.11827876984126982\nCiti\tcompetence\t1\t0\t0.6666666666666666\t0.6666666666666666\nCiti\tcompetency\t1\t0\t0.6666666666666666\t0.6666666666666666\nCiti\teffectiveness\t1\t0\t0.175\t0.175\nCiti\tefficiency\t1\t0\t0.7568452380952382\t0.7568452380952382\nCiti\tskill\t1\t0\t0.8875\t0.8875\nCiti\tunderstanding\t1\t0\t-0.5\t-0.5\nEmagination Computer Camps\tcraft\t20\t0\t-1.5\t-0.075\nHRPUNDITS\tintelligence\t5\t0\t7.190476190476191\t1.438095238095238\nHRPUNDITS\tproficiency\t13\t0\t21.069642857142853\t1.6207417582417578\nJetblack\tart\t12\t0\t0.0\t0.0\nJetblack\tcompetence\t6\t0\t0.0\t0.0\nJetblack\tcompetency\t6\t0\t0.0\t0.0\nRenaissance Infrastructure Consulting\tart\t13\t0\t30.93876563958917\t2.379905049199167\nRenaissance Infrastructure Consulting\tcomprehension\t1\t0\t1.6736785714285711\t1.6736785714285711\nRenaissance Infrastructure Consulting\tproficiency\t6\t0\t10.591818394024278\t1.765303065670713\nRenaissance Infrastructure Consulting\tturn\t1\t0\t2.2999285714285715\t2.2999285714285715\nSmartWatt\tart\t14\t0\t2.1592261904761907\t0.15423044217687076\nSmartiply, Inc\tart\t17\t0\t1.5416666666666667\t0.09068627450980393\nSmartiply, Inc\tmeans\t4\t0\t3.5666666666666664\t0.8916666666666666\nViaSat\tart\t15\t0\t-3.28125\t-0.21875\nViaSat\tefficiency\t2\t0\t0.3333333333333333\t0.16666666666666666\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1528958510389_1182681191",
+      "id": "20180614-154150_1094252704",
+      "dateCreated": "Jun 14, 2018 3:41:50 PM",
+      "dateStarted": "Jun 14, 2018 3:51:48 PM",
+      "dateFinished": "Jun 14, 2018 3:51:48 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%python\nawj[\u0027new_result\u0027] \u003d awj[\u0027result\u0027] / awj[\u0027frequency\u0027]\nz.show(awj)",
+      "user": "anonymous",
+      "dateUpdated": "Jun 14, 2018 3:47:27 PM",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "multiBarChart",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "multiBarChart": {}
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "col_index",
+                  "index": 0.0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [
+                {
+                  "name": "word",
+                  "index": 1.0,
+                  "aggr": "sum"
+                }
+              ],
+              "values": [
+                {
+                  "name": "new_result",
+                  "index": 5.0,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "col_index\tword\tfrequency\tscore\tresult\tnew_result\ndata analyst\taptitude\t6\t0\t-0.5020833333333334\t-0.08368055555555558\ndata analyst\tart\t233\t0\t65.65859958097458\t0.2817965647252128\ndata analyst\tbent\t2\t0\t1.53125\t0.765625\ndata analyst\tcapacity\t4\t0\t2.569642857142857\t0.6424107142857143\ndata analyst\tcompetence\t21\t0\t2.668884920634921\t0.12708975812547244\ndata analyst\tcompetency\t21\t0\t2.668884920634921\t0.12708975812547244\ndata analyst\tcomprehension\t7\t0\t1.9304439865689864\t0.27577771236699805\ndata analyst\tcraft\t1\t0\t0.0\t0.0\ndata analyst\tcunning\t1\t0\t0.4375\t0.4375\ndata analyst\tdexterity\t1\t0\t0.0\t0.0\ndata analyst\tdynamism\t2\t0\t-0.5\t-0.25\ndata analyst\teffectiveness\t35\t0\t12.360988095238097\t0.3531710884353742\ndata analyst\tefficiency\t13\t0\t4.181718253968254\t0.3216706349206349\ndata analyst\tendowment\t1\t0\t0.25\t0.25\ndata analyst\tfacility\t20\t0\t4.588583333333334\t0.2294291666666667\ndata analyst\tfaculty\t1\t0\t0.0\t0.0\ndata analyst\tfunction\t33\t0\t10.086278651903656\t0.30564480763344415\ndata analyst\tgift\t1\t0\t0.0\t0.0\ndata analyst\tinfluence\t3\t0\t1.4288685383244206\t0.47628951277480686\ndata analyst\tintelligence\t10\t0\t0.3354157509157509\t0.033541575091575085\ndata analyst\tmeans\t2\t0\t0.6825396825396826\t0.3412698412698413\ndata analyst\tmight\t7\t0\t-0.2303571428571429\t-0.03290816326530613\ndata analyst\tpotential\t3\t0\t1.1916666666666669\t0.3972222222222223\ndata analyst\tpotentiality\t3\t0\t1.1916666666666669\t0.3972222222222223\ndata analyst\tpower\t27\t0\t7.7060465686274515\t0.2854091321713871\ndata analyst\tproficiency\t31\t0\t7.992806013431015\t0.2578324520461618\ndata analyst\tqualification\t45\t0\t23.378204517704514\t0.5195156559489892\ndata analyst\tresourcefulness\t21\t0\t8.377299866799866\t0.3989190412761841\ndata analyst\tskill\t69\t0\t11.444753378157785\t0.16586599098779398\ndata analyst\tstrength\t1\t0\t0.3625\t0.3625\ndata analyst\tturn\t9\t0\t-0.906357142857143\t-0.10070634920634922\ndata analyst\tunderstanding\t29\t0\t17.16795884507649\t0.5919985808647066\ndata analyst\tvirtue\t1\t0\t0.0\t0.0\ndata architect\taptitude\t1\t0\t0.59375\t0.59375\ndata architect\tart\t333\t0\t192.29123032968064\t0.5774511421311731\ndata architect\tbent\t1\t0\t0.0\t0.0\ndata architect\tcapability\t4\t0\t4.590277777777779\t1.1475694444444446\ndata architect\tcapacity\t8\t0\t3.174\t0.39675\ndata architect\tcompetence\t34\t0\t9.594454975579977\t0.28218985222294046\ndata architect\tcompetency\t34\t0\t9.594454975579977\t0.28218985222294046\ndata architect\tcomprehension\t11\t0\t8.123232142857141\t0.7384756493506491\ndata architect\tcraft\t21\t0\t5.830952380952381\t0.2776643990929705\ndata architect\tdynamism\t27\t0\t1.9953214285714287\t0.07390079365079366\ndata architect\teffectiveness\t36\t0\t10.870419719169718\t0.30195610331026995\ndata architect\tefficiency\t15\t0\t7.522104353979354\t0.5014736235986236\ndata architect\tfacility\t44\t0\t18.06972130647131\t0.4106754842379843\ndata architect\tfunction\t43\t0\t15.364497247034016\t0.35731388946590736\ndata architect\tgift\t2\t0\t0.6130952380952381\t0.30654761904761907\ndata architect\tinfluence\t6\t0\t-0.7951089743589743\t-0.1325181623931624\ndata architect\tintelligence\t12\t0\t7.5019761904761895\t0.6251646825396825\ndata architect\tmeans\t12\t0\t36.07851071428571\t3.0065425595238096\ndata architect\tpotential\t5\t0\t-0.8989166666666666\t-0.17978333333333332\ndata architect\tpotentiality\t5\t0\t-0.8989166666666666\t-0.17978333333333332\ndata architect\tpower\t46\t0\t7.226896502620188\t0.1571064457091345\ndata architect\tproficiency\t55\t0\t50.162278794734675\t0.9120414326315396\ndata architect\tqualification\t101\t0\t59.9908573313941\t0.5939688844692486\ndata architect\tqualifiedness\t1\t0\t-0.4676666666666667\t-0.4676666666666667\ndata architect\tresourcefulness\t21\t0\t8.576373626373629\t0.40839874411302995\ndata architect\tskill\t105\t0\t44.68016303826894\t0.425525362269228\ndata architect\tstrength\t2\t0\t0.8999999999999999\t0.44999999999999996\ndata architect\ttalent\t11\t0\t0.7761904761904762\t0.07056277056277056\ndata architect\tturn\t13\t0\t3.087428571428572\t0.23749450549450554\ndata architect\tunderstanding\t110\t0\t57.30412335703513\t0.5209465759730466\ndata architect\tvirtue\t21\t0\t1.9505297619047621\t0.09288236961451249\ndata engineer\tart\t9\t0\t2.4452110389610393\t0.27169011544011545\ndata engineer\tcraft\t13\t0\t0.4821428571428572\t0.037087912087912095\ndata engineer\tdynamism\t1\t0\t0.0\t0.0\ndata engineer\teffectiveness\t3\t0\t2.6721230158730163\t0.8907076719576721\ndata engineer\tefficiency\t1\t0\t0.15733333333333333\t0.15733333333333333\ndata engineer\tfacility\t2\t0\t0.125\t0.0625\ndata engineer\tfunction\t1\t0\t0.0\t0.0\ndata engineer\tmeans\t1\t0\t0.0\t0.0\ndata engineer\tpower\t3\t0\t-0.030166666666666675\t-0.010055555555555559\ndata engineer\tproficiency\t2\t0\t1.2083333333333333\t0.6041666666666666\ndata engineer\tskill\t4\t0\t0.7613095238095238\t0.19032738095238094\ndata engineer\tunderstanding\t2\t0\t-1.59375\t-0.796875\ndata engineer\tvirtue\t1\t0\t0.25\t0.25\ndeep learning engineer\taptitude\t1\t0\t0.0\t0.0\ndeep learning engineer\tart\t10\t0\t2.703125\t0.2703125\ndeep learning engineer\tcompetence\t2\t0\t-0.16666666666666674\t-0.08333333333333337\ndeep learning engineer\tcompetency\t2\t0\t-0.16666666666666674\t-0.08333333333333337\ndeep learning engineer\tdynamism\t1\t0\t0.3333333333333333\t0.3333333333333333\ndeep learning engineer\tfacility\t1\t0\t-0.125\t-0.125\ndeep learning engineer\tfunction\t2\t0\t0.0\t0.0\ndeep learning engineer\tgift\t2\t0\t0.0\t0.0\ndeep learning engineer\tproficiency\t3\t0\t-0.4318461538461539\t-0.14394871794871797\ndeep learning engineer\tqualification\t2\t0\t0.4\t0.2\ndeep learning engineer\tresourcefulness\t1\t0\t0.3125\t0.3125\ndeep learning engineer\tskill\t2\t0\t0.8125\t0.40625\ndeep learning engineer\ttalent\t1\t0\t0.425\t0.425\ndeep learning engineer\tturn\t1\t0\t0.0\t0.0\ndeep learning engineer\tunderstanding\t2\t0\t1.818452380952381\t0.9092261904761905\ndeep learning engineer\tvirtue\t1\t0\t0.15000000000000002\t0.15000000000000002\nmachine learning engineer\tadequacy\t1\t0\t-0.375\t-0.375\nmachine learning engineer\taptitude\t3\t0\t0.4596944444444445\t0.1532314814814815\nmachine learning engineer\tart\t236\t0\t65.65259170551671\t0.2781889479047318\nmachine learning engineer\tbent\t1\t0\t0.0\t0.0\nmachine learning engineer\tcapability\t1\t0\t0.10714285714285714\t0.10714285714285714\nmachine learning engineer\tcapacity\t2\t0\t1.46875\t0.734375\nmachine learning engineer\tcompetence\t22\t0\t13.43025\t0.610465909090909\nmachine learning engineer\tcompetency\t22\t0\t13.43025\t0.610465909090909\nmachine learning engineer\tcomprehension\t9\t0\t2.720833333333333\t0.3023148148148148\nmachine learning engineer\tcraft\t24\t0\t0.7425595238095241\t0.03093998015873017\nmachine learning engineer\tcunning\t3\t0\t-0.08333333333333329\t-0.027777777777777762\nmachine learning engineer\tdexterity\t3\t0\t2.3973214285714284\t0.7991071428571428\nmachine learning engineer\tdynamism\t19\t0\t10.530165750915751\t0.5542192500481974\nmachine learning engineer\teffectiveness\t20\t0\t11.563975140056026\t0.5781987570028013\nmachine learning engineer\tefficiency\t25\t0\t10.197076330532214\t0.40788305322128854\nmachine learning engineer\tfacility\t6\t0\t1.4216190476190471\t0.23693650793650786\nmachine learning engineer\tfaculty\t1\t0\t0.8571428571428571\t0.8571428571428571\nmachine learning engineer\tfunction\t18\t0\t5.71161858974359\t0.31731214387464385\nmachine learning engineer\tinfluence\t3\t0\t-0.2375\t-0.07916666666666666\nmachine learning engineer\tintelligence\t49\t0\t9.363758547008546\t0.19109711320425604\nmachine learning engineer\tmeans\t14\t0\t9.466071428571428\t0.6761479591836734\nmachine learning engineer\tmight\t3\t0\t0.375\t0.125\nmachine learning engineer\tpotential\t3\t0\t-0.02083333333333337\t-0.006944444444444457\nmachine learning engineer\tpotentiality\t3\t0\t-0.02083333333333337\t-0.006944444444444457\nmachine learning engineer\tpower\t40\t0\t4.966712454212454\t0.12416781135531134\nmachine learning engineer\tproficiency\t36\t0\t20.26972880305968\t0.5630480223072134\nmachine learning engineer\tqualification\t66\t0\t29.954394877181652\t0.45385446783608563\nmachine learning engineer\tqualifiedness\t1\t0\t0.5\t0.5\nmachine learning engineer\tresourcefulness\t14\t0\t7.983928571428571\t0.5702806122448979\nmachine learning engineer\tskill\t48\t0\t15.04530067155067\t0.31344376399063895\nmachine learning engineer\tstrength\t12\t0\t-1.1\t-0.09166666666666667\nmachine learning engineer\ttalent\t5\t0\t0.0\t0.0\nmachine learning engineer\tturn\t2\t0\t0.25\t0.125\nmachine learning engineer\tunderstanding\t34\t0\t10.60802687998276\t0.3120007905877282\nmachine learning engineer\tvirtue\t4\t0\t0.0\t0.0\nsoftware developer\tart\t57\t0\t23.297976190476195\t0.40873642439431923\nsoftware developer\tcapability\t1\t0\t0.0\t0.0\nsoftware developer\tcapacity\t1\t0\t0.6642857142857143\t0.6642857142857143\nsoftware developer\tcompetence\t17\t0\t-2.664908008658009\t-0.15675929462694171\nsoftware developer\tcompetency\t17\t0\t-2.664908008658009\t-0.15675929462694171\nsoftware developer\tcraft\t7\t0\t1.9375\t0.2767857142857143\nsoftware developer\tcunning\t2\t0\t0.10714285714285714\t0.05357142857142857\nsoftware developer\tdynamism\t8\t0\t0.7875\t0.0984375\nsoftware developer\teffectiveness\t7\t0\t0.4427083333333333\t0.06324404761904762\nsoftware developer\tefficiency\t3\t0\t1.6976190476190478\t0.565873015873016\nsoftware developer\tfacility\t3\t0\t0.8217678571428568\t0.27392261904761894\nsoftware developer\tfunction\t15\t0\t-2.7228603896103905\t-0.18152402597402603\nsoftware developer\tintelligence\t3\t0\t0.0\t0.0\nsoftware developer\tmeans\t1\t0\t0.25\t0.25\nsoftware developer\tpotential\t2\t0\t-0.5926666666666667\t-0.29633333333333334\nsoftware developer\tpotentiality\t2\t0\t-0.5926666666666667\t-0.29633333333333334\nsoftware developer\tpower\t6\t0\t3.0140714285714285\t0.5023452380952381\nsoftware developer\tproficiency\t19\t0\t5.174595238095238\t0.2723471177944862\nsoftware developer\tqualification\t26\t0\t8.37806504884005\t0.32223327110923267\nsoftware developer\tresourcefulness\t6\t0\t1.897767857142857\t0.3162946428571428\nsoftware developer\tskill\t32\t0\t1.0737481684981685\t0.033554630265567764\nsoftware developer\tturn\t4\t0\t1.5873522727272726\t0.39683806818181816\nsoftware developer\tunderstanding\t21\t0\t1.0657957875457875\t0.05075218035932322\nsoftware developer\tvirtue\t2\t0\t-0.0625\t-0.03125\nsoftware embedded engineer\taptitude\t3\t0\t0.5947649572649573\t0.19825498575498576\nsoftware embedded engineer\tart\t163\t0\t37.51201106654782\t0.2301350372180848\nsoftware embedded engineer\tcapacity\t4\t0\t0.35714285714285715\t0.08928571428571429\nsoftware embedded engineer\tcompetence\t14\t0\t1.3383456368193212\t0.0955961169156658\nsoftware embedded engineer\tcompetency\t14\t0\t1.3383456368193212\t0.0955961169156658\nsoftware embedded engineer\tcomprehension\t8\t0\t0.1752722241209086\t0.021909028015113574\nsoftware embedded engineer\tcraft\t9\t0\t0.375\t0.041666666666666664\nsoftware embedded engineer\tcunning\t2\t0\t0.4791666666666664\t0.2395833333333332\nsoftware embedded engineer\tdynamism\t9\t0\t1.8779761904761905\t0.20866402116402116\nsoftware embedded engineer\teffectiveness\t23\t0\t9.349378104351787\t0.40649470018920814\nsoftware embedded engineer\tefficiency\t15\t0\t4.271380952380952\t0.2847587301587301\nsoftware embedded engineer\tfacility\t3\t0\t1.125\t0.375\nsoftware embedded engineer\tfunction\t28\t0\t7.857266265597148\t0.2806166523427553\nsoftware embedded engineer\tinfluence\t2\t0\t0.0\t0.0\nsoftware embedded engineer\tintelligence\t1\t0\t0.2916666666666667\t0.2916666666666667\nsoftware embedded engineer\tmeans\t4\t0\t3.5666666666666664\t0.8916666666666666\nsoftware embedded engineer\tmight\t2\t0\t0.0\t0.0\nsoftware embedded engineer\tpotential\t4\t0\t0.175\t0.04375\nsoftware embedded engineer\tpotentiality\t4\t0\t0.175\t0.04375\nsoftware embedded engineer\tpower\t45\t0\t3.676703968253968\t0.08170453262786595\nsoftware embedded engineer\tproficiency\t44\t0\t13.306256826936394\t0.30241492788491803\nsoftware embedded engineer\tqualification\t90\t0\t36.914276018099535\t0.4101586224233282\nsoftware embedded engineer\tresourcefulness\t8\t0\t2.6979166666666665\t0.3372395833333333\nsoftware embedded engineer\tskill\t56\t0\t10.969935862383227\t0.19589171182827192\nsoftware embedded engineer\tstrength\t1\t0\t0.0\t0.0\nsoftware embedded engineer\ttalent\t3\t0\t0.0\t0.0\nsoftware embedded engineer\tturn\t7\t0\t0.303125\t0.04330357142857143\nsoftware embedded engineer\tunderstanding\t65\t0\t37.263200396825404\t0.5732800061050062\nsoftware embedded engineer\tvirtue\t13\t0\t0.5741904761904761\t0.04416849816849817\nsoftware engineer\taptitude\t1\t0\t0.875\t0.875\nsoftware engineer\tart\t202\t0\t28.5353084970585\t0.14126390345078466\nsoftware engineer\tbent\t2\t0\t0.0\t0.0\nsoftware engineer\tcapacity\t3\t0\t-0.25\t-0.08333333333333333\nsoftware engineer\tcompetence\t22\t0\t4.602486832611834\t0.20920394693690153\nsoftware engineer\tcompetency\t22\t0\t4.602486832611834\t0.20920394693690153\nsoftware engineer\tcomprehension\t2\t0\t2.5714285714285707\t1.2857142857142854\nsoftware engineer\tcraft\t14\t0\t0.18500000000000005\t0.013214285714285718\nsoftware engineer\tcunning\t2\t0\t0.0\t0.0\nsoftware engineer\tdexterity\t1\t0\t0.0\t0.0\nsoftware engineer\tdynamism\t3\t0\t0.4583333333333333\t0.15277777777777776\nsoftware engineer\teffectiveness\t16\t0\t7.121874084249084\t0.44511713026556776\nsoftware engineer\tefficiency\t8\t0\t3.9203754578754593\t0.4900469322344324\nsoftware engineer\tfacility\t9\t0\t8.237053571428572\t0.9152281746031746\nsoftware engineer\tfunction\t13\t0\t1.7399305555555555\t0.13384081196581196\nsoftware engineer\tgift\t1\t0\t0.0\t0.0\nsoftware engineer\tinfluence\t3\t0\t0.4444444444444444\t0.14814814814814814\nsoftware engineer\tintelligence\t8\t0\t0.4750000000000002\t0.059375000000000025\nsoftware engineer\tmeans\t3\t0\t0.625\t0.20833333333333334\nsoftware engineer\tpotential\t6\t0\t1.2658611111111109\t0.2109768518518518\nsoftware engineer\tpotentiality\t6\t0\t1.2658611111111109\t0.2109768518518518\nsoftware engineer\tpower\t22\t0\t3.2436011904761903\t0.14743641774891775\nsoftware engineer\tproficiency\t21\t0\t10.877731684981685\t0.517987223094366\nsoftware engineer\tqualification\t31\t0\t9.254646825396826\t0.29853699436763953\nsoftware engineer\tresourcefulness\t14\t0\t7.855382284382286\t0.5610987345987347\nsoftware engineer\tskill\t41\t0\t14.039724206349206\t0.3424322977158343\nsoftware engineer\ttalent\t2\t0\t-0.9017857142857144\t-0.4508928571428572\nsoftware engineer\tturn\t8\t0\t0.35\t0.04375\nsoftware engineer\tunderstanding\t33\t0\t4.960221112221113\t0.15030973067336706\nsoftware engineer\tvirtue\t6\t0\t1.5651785714285715\t0.26086309523809526\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1528958571144_1357585410",
+      "id": "20180614-154251_1096712414",
+      "dateCreated": "Jun 14, 2018 3:42:51 PM",
+      "dateStarted": "Jun 14, 2018 3:47:09 PM",
+      "dateFinished": "Jun 14, 2018 3:47:09 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%python\nz.show(plj)",
+      "user": "anonymous",
+      "dateUpdated": "Jun 14, 2018 4:27:40 PM",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "multiBarChart",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "multiBarChart": {}
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "col_index",
+                  "index": 0.0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [
+                {
+                  "name": "word",
+                  "index": 1.0,
+                  "aggr": "sum"
+                }
+              ],
+              "values": [
+                {
+                  "name": "frequency",
+                  "index": 2.0,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "col_index\tword\tfrequency\tscore\tresult\ndata analyst\tapplication\t29\t0\t5.493407925\ndata analyst\tartificial\t1\t0\t0.125\ndata analyst\tc\t11\t0\t1606.598377\ndata analyst\tc#\t2\t0\t0.0\ndata analyst\tcobol\t1\t0\t0.0\ndata analyst\tdatabase\t12\t0\t2.054899351\ndata analyst\tdeep\t21\t0\t1.966234848\ndata analyst\tembedded\t1\t0\t0.607142857\ndata analyst\texperience\t145\t0\t49.92709411\ndata analyst\thadoop\t4\t0\t0.7880952379999999\ndata analyst\thive\t2\t0\t0.601785714\ndata analyst\tjava\t8\t0\t5.687889193999999\ndata analyst\tmath\t2\t0\t0.0\ndata analyst\tmobile\t12\t0\t1.289963095\ndata analyst\tmodeling\t43\t0\t25.70902943\ndata analyst\tpython\t16\t0\t12.87408425\ndata analyst\tr\t91\t0\t2041.265975\ndata analyst\truby\t2\t0\t0.0625\ndata analyst\tsas\t488\t0\t114.44736809999999\ndata analyst\tscala\t7\t0\t11.12123599\ndata analyst\tspark\t6\t0\t0.48958333299999995\ndata analyst\tsql\t22\t0\t3.1973662999999997\ndata analyst\tswift\t1\t0\t0.0\ndata analyst\tunix\t4\t0\t0.682142857\ndata architect\tapplication\t67\t0\t33.25251267\ndata architect\tc\t13\t0\t3710.253968\ndata architect\tc#\t9\t0\t0.065674603\ndata architect\tc++\t2\t0\t-0.6875\ndata architect\tcobol\t1\t0\t0.0\ndata architect\tdatabase\t41\t0\t22.44505424\ndata architect\tdeep\t20\t0\t16.99762546\ndata architect\texperience\t435\t0\t263.5684712\ndata architect\thadoop\t20\t0\t6.7289728570000005\ndata architect\thive\t3\t0\t0.7961538459999999\ndata architect\tjava\t94\t0\t4.970998778999999\ndata architect\tmath\t9\t0\t1.797671569\ndata architect\tmobile\t32\t0\t5.19102091\ndata architect\tmodeling\t61\t0\t50.41688599\ndata architect\tperl\t7\t0\t5.17862395\ndata architect\tpython\t36\t0\t7.405738095\ndata architect\tr\t55\t0\t5431.540847\ndata architect\trdd\t3\t0\t1.952296703\ndata architect\truby\t1\t0\t0.25\ndata architect\tsas\t1012\t0\t429.53379630000006\ndata architect\tscala\t19\t0\t19.92137332\ndata architect\tspark\t14\t0\t3.124542125\ndata architect\tsql\t93\t0\t20.714848899999996\ndata architect\tswift\t6\t0\t0.6519230770000001\ndata architect\tunix\t12\t0\t4.091369048\ndata engineer\tapplication\t2\t0\t1.375\ndata engineer\tc\t12\t0\t57.75504117\ndata engineer\texperience\t4\t0\t0.48095238100000004\ndata engineer\tmath\t2\t0\t0.0\ndata engineer\tmatlab\t1\t0\t0.0\ndata engineer\tmobile\t1\t0\t0.0\ndata engineer\tmodeling\t4\t0\t1.157333333\ndata engineer\tpython\t2\t0\t0.25\ndata engineer\tr\t52\t0\t98.08677996\ndata engineer\truby\t1\t0\t-0.035714286\ndata engineer\tsas\t27\t0\t5.6537077920000005\ndata engineer\tsql\t1\t0\t-0.25\ndata engineer\tunix\t1\t0\t0.0\ndeep learning engineer\tapplication\t1\t0\t0.333333333\ndeep learning engineer\tc\t12\t0\t83.54237612\ndeep learning engineer\tc#\t1\t0\t0.0\ndeep learning engineer\tc++\t1\t0\t0.35416666700000005\ndeep learning engineer\tdeep\t5\t0\t5.173214286\ndeep learning engineer\tembedded\t1\t0\t-0.05952381\ndeep learning engineer\texperience\t9\t0\t1.502082418\ndeep learning engineer\tjava\t4\t0\t0.708333333\ndeep learning engineer\tmath\t1\t0\t0.375\ndeep learning engineer\tmobile\t3\t0\t1.914606227\ndeep learning engineer\tmodeling\t1\t0\t0.1875\ndeep learning engineer\tr\t47\t0\t111.59245279999999\ndeep learning engineer\tsas\t22\t0\t6.856355635\ndeep learning engineer\tscala\t3\t0\t0.604166667\ndeep learning engineer\tsql\t2\t0\t-0.306166667\ndeep learning engineer\tunix\t2\t0\t0.483333333\nmachine learning engineer\tapplication\t30\t0\t11.84821749\nmachine learning engineer\tartificial\t18\t0\t4.53031337\nmachine learning engineer\tc\t31\t0\t1745.414227\nmachine learning engineer\tc#\t3\t0\t1.877083333\nmachine learning engineer\tc++\t12\t0\t6.510630037\nmachine learning engineer\tdatabase\t39\t0\t4.149054212\nmachine learning engineer\tdeep\t50\t0\t15.30437118\nmachine learning engineer\tembedded\t4\t0\t0.887095238\nmachine learning engineer\texperience\t321\t0\t136.9781144\nmachine learning engineer\tf#\t1\t0\t-0.350595238\nmachine learning engineer\tfortran\t1\t0\t0.28125\nmachine learning engineer\thadoop\t21\t0\t0.93592033\nmachine learning engineer\thive\t4\t0\t0.6827838829999999\nmachine learning engineer\tjava\t88\t0\t31.83435531\nmachine learning engineer\tmath\t24\t0\t1.9062832330000001\nmachine learning engineer\tmatlab\t12\t0\t8.321428571\nmachine learning engineer\tmobile\t23\t0\t1.257051282\nmachine learning engineer\tmodeling\t45\t0\t27.67155377\nmachine learning engineer\toctave\t1\t0\t0.0\nmachine learning engineer\tperl\t7\t0\t7.909509804\nmachine learning engineer\tpython\t126\t0\t40.64537126\nmachine learning engineer\tr\t51\t0\t2472.92739\nmachine learning engineer\truby\t5\t0\t0.607142857\nmachine learning engineer\tsas\t549\t0\t146.9175406\nmachine learning engineer\tscala\t41\t0\t7.703197497000001\nmachine learning engineer\tspark\t27\t0\t13.57725504\nmachine learning engineer\tsql\t58\t0\t17.57720973\nmachine learning engineer\tswift\t8\t0\t2.0198333330000002\nmachine learning engineer\tunix\t5\t0\t0.529761905\nsoftware developer\tapplication\t36\t0\t5.901925672000001\nsoftware developer\tc\t24\t0\t493.5203736\nsoftware developer\tc#\t4\t0\t0.702571429\nsoftware developer\tc++\t9\t0\t-1.4638888890000001\nsoftware developer\tcobol\t1\t0\t0.0\nsoftware developer\tdatabase\t20\t0\t9.419833333\nsoftware developer\tdeep\t9\t0\t-1.21874359\nsoftware developer\texperience\t152\t0\t52.99316607\nsoftware developer\thadoop\t5\t0\t0.293498168\nsoftware developer\thive\t4\t0\t3.3081730769999997\nsoftware developer\tjava\t94\t0\t30.10603632\nsoftware developer\tmath\t3\t0\t0.008928571\nsoftware developer\tmatlab\t2\t0\t0.658333333\nsoftware developer\tmobile\t11\t0\t0.822916667\nsoftware developer\tmodeling\t7\t0\t1.473809524\nsoftware developer\tperl\t2\t0\t0.0\nsoftware developer\tpython\t24\t0\t0.208730159\nsoftware developer\tr\t18\t0\t703.492696\nsoftware developer\truby\t1\t0\t0.0\nsoftware developer\tsas\t228\t0\t53.60203439\nsoftware developer\tscala\t4\t0\t1.3843253969999998\nsoftware developer\tspark\t4\t0\t0.605769231\nsoftware developer\tsql\t36\t0\t4.185996337\nsoftware developer\tswift\t3\t0\t0.477678571\nsoftware developer\tunix\t3\t0\t0.536111111\nsoftware embedded engineer\tapplication\t54\t0\t12.75095597\nsoftware embedded engineer\tc\t68\t0\t1532.079942\nsoftware embedded engineer\tc#\t6\t0\t0.0\nsoftware embedded engineer\tc++\t85\t0\t11.50141669\nsoftware embedded engineer\tdatabase\t9\t0\t-0.440384615\nsoftware embedded engineer\tdeep\t15\t0\t4.434056263\nsoftware embedded engineer\tembedded\t154\t0\t32.68795484\nsoftware embedded engineer\texperience\t384\t0\t78.90752236\nsoftware embedded engineer\tfortran\t3\t0\t-0.375\nsoftware embedded engineer\thive\t1\t0\t0.0\nsoftware embedded engineer\tjava\t102\t0\t31.92097222\nsoftware embedded engineer\tmath\t10\t0\t2.938583333\nsoftware embedded engineer\tmatlab\t27\t0\t18.61505754\nsoftware embedded engineer\tmobile\t18\t0\t-1.3507023809999998\nsoftware embedded engineer\tmodeling\t24\t0\t4.03322619\nsoftware embedded engineer\tperl\t29\t0\t6.839880952000001\nsoftware embedded engineer\tpython\t42\t0\t14.89310714\nsoftware embedded engineer\tr\t14\t0\t2104.283629\nsoftware embedded engineer\trdd\t1\t0\t0.25\nsoftware embedded engineer\truby\t2\t0\t1.083333333\nsoftware embedded engineer\tsas\t691\t0\t165.50304219999998\nsoftware embedded engineer\tspark\t14\t0\t2.42072619\nsoftware embedded engineer\tsql\t15\t0\t6.420404762\nsoftware embedded engineer\tswift\t1\t0\t0.25\nsoftware embedded engineer\tunix\t12\t0\t-2.243930556\nsoftware engineer\tapplication\t58\t0\t17.92540904\nsoftware engineer\tartificial\t2\t0\t0.0\nsoftware engineer\tc\t53\t0\t909.5515757999999\nsoftware engineer\tc#\t7\t0\t-0.575404762\nsoftware engineer\tc++\t6\t0\t-0.642857143\nsoftware engineer\tdatabase\t22\t0\t1.653047619\nsoftware engineer\tdeep\t13\t0\t2.229017857\nsoftware engineer\texperience\t141\t0\t20.33586014\nsoftware engineer\thadoop\t2\t0\t1.528708791\nsoftware engineer\thive\t3\t0\t1.676282051\nsoftware engineer\tjava\t56\t0\t9.656309524\nsoftware engineer\tmath\t10\t0\t3.2625\nsoftware engineer\tmobile\t6\t0\t0.21983333300000002\nsoftware engineer\tmodeling\t21\t0\t2.7433452380000003\nsoftware engineer\tperl\t7\t0\t0.32782738100000003\nsoftware engineer\tpython\t14\t0\t3.428571429\nsoftware engineer\tr\t16\t0\t1278.577625\nsoftware engineer\truby\t6\t0\t0.933333333\nsoftware engineer\tsas\t447\t0\t102.8460121\nsoftware engineer\tscala\t8\t0\t0.363736264\nsoftware engineer\tspark\t9\t0\t0.545153846\nsoftware engineer\tsql\t31\t0\t5.229100733\nsoftware engineer\tswift\t2\t0\t0.601190476\nsoftware engineer\tunix\t3\t0\t0.182142857\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1528958713824_1849510688",
+      "id": "20180614-154513_712207378",
+      "dateCreated": "Jun 14, 2018 3:45:13 PM",
+      "dateStarted": "Jun 14, 2018 4:27:40 PM",
+      "dateFinished": "Jun 14, 2018 4:27:40 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%python\nrwj_2 \u003d pd.DataFrame(rwj, columns \u003d [\u0027word\u0027,\u0027frequency\u0027])\nrwj_2 \u003d rwj_2.sort_values(\u0027frequency\u0027,ascending\u003dFalse)\nrwj_2[\u0027frequency\u0027] \u003d rwj_2.groupby(\u0027word\u0027)[\u0027frequency\u0027].transform(\u0027sum\u0027)\nrwj_2 \u003d rwj_2.drop_duplicates([\u0027word\u0027], keep\u003d\u0027first\u0027)\nrwj_h \u003d rwj_2.head(10)\nrwj_h \u003d pd.DataFrame(rwj_h, columns \u003d [\u0027word\u0027])\nrwj \u003d pd.merge(rwj,rwj_h)\nz.show(rwj)",
+      "user": "anonymous",
+      "dateUpdated": "Jun 14, 2018 3:56:46 PM",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "multiBarChart",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "multiBarChart": {}
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "col_index",
+                  "index": 0.0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [
+                {
+                  "name": "word",
+                  "index": 1.0,
+                  "aggr": "sum"
+                }
+              ],
+              "values": [
+                {
+                  "name": "frequency",
+                  "index": 2.0,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "col_index\tword\tfrequency\tscore\tresult\ndata analyst\tcustomized\t35\t0\t7.649967661423543\ndata architect\tcustomized\t109\t0\t36.674277119938886\ndata engineer\tcustomized\t7\t0\t1.3526785714285714\nmachine learning engineer\tcustomized\t45\t0\t12.7498254147813\nsoftware developer\tcustomized\t12\t0\t6.567261904761906\nsoftware embedded engineer\tcustomized\t41\t0\t14.07898196656285\nsoftware engineer\tcustomized\t30\t0\t4.611860994397759\ndata analyst\tdesigned\t26\t0\t12.929518745143746\ndata architect\tdesigned\t156\t0\t47.42429562920739\ndata engineer\tdesigned\t11\t0\t1.9270833333333333\ndeep learning engineer\tdesigned\t4\t0\t0.30000000000000004\nmachine learning engineer\tdesigned\t94\t0\t19.56332329059829\nsoftware developer\tdesigned\t36\t0\t11.01263961038961\nsoftware embedded engineer\tdesigned\t201\t0\t68.73982409343323\nsoftware engineer\tdesigned\t56\t0\t7.5568889068447875\ndata analyst\tdeveloped\t69\t0\t23.916564407814413\ndata architect\tdeveloped\t262\t0\t134.34687067958694\ndata engineer\tdeveloped\t10\t0\t-1.1012976190476191\ndeep learning engineer\tdeveloped\t9\t0\t3.683928571428571\nmachine learning engineer\tdeveloped\t107\t0\t42.98275026362524\nsoftware developer\tdeveloped\t102\t0\t36.490519841269844\nsoftware embedded engineer\tdeveloped\t221\t0\t54.878957435967884\nsoftware engineer\tdeveloped\t96\t0\t26.192675033300034\ndata analyst\tmanaged\t148\t0\t44.10725378624643\ndata architect\tmanaged\t223\t0\t69.38521485867075\ndata engineer\tmanaged\t3\t0\t0.4583333333333333\ndeep learning engineer\tmanaged\t9\t0\t0.8976190476190475\nmachine learning engineer\tmanaged\t72\t0\t23.083770868020874\nsoftware developer\tmanaged\t26\t0\t6.042791666666668\nsoftware embedded engineer\tmanaged\t86\t0\t30.924871400658173\nsoftware engineer\tmanaged\t91\t0\t17.274515215176976\ndata analyst\toperated\t61\t0\t14.339385701716584\ndata architect\toperated\t107\t0\t42.011084635952294\ndata engineer\toperated\t1\t0\t-0.030166666666666675\ndeep learning engineer\toperated\t1\t0\t0.15000000000000002\nmachine learning engineer\toperated\t65\t0\t20.22597794117647\nsoftware developer\toperated\t45\t0\t5.290329365079366\nsoftware embedded engineer\toperated\t52\t0\t7.757080298786179\nsoftware engineer\toperated\t57\t0\t16.068435263266142\ndata analyst\tperformed\t63\t0\t27.571088328338327\ndata architect\tperformed\t109\t0\t99.06077479709828\ndata engineer\tperformed\t5\t0\t-0.14101515151515148\ndeep learning engineer\tperformed\t2\t0\t0.75\nmachine learning engineer\tperformed\t41\t0\t26.251503851540622\nsoftware developer\tperformed\t19\t0\t-5.779193722943723\nsoftware embedded engineer\tperformed\t57\t0\t35.10829266142354\nsoftware engineer\tperformed\t53\t0\t11.422193851899733\ndata analyst\tproduced\t42\t0\t19.981403443778447\ndata architect\tproduced\t85\t0\t38.34179899267399\ndata engineer\tproduced\t4\t0\t1.3738095238095238\ndeep learning engineer\tproduced\t6\t0\t0.5863095238095238\nmachine learning engineer\tproduced\t91\t0\t28.416626086331977\nsoftware developer\tproduced\t18\t0\t2.217153846153846\nsoftware embedded engineer\tproduced\t124\t0\t42.751122885714224\nsoftware engineer\tproduced\t34\t0\t7.939688357394237\ndata analyst\tproved\t39\t0\t5.639289089994972\ndata architect\tproved\t120\t0\t55.156022217978105\ndata engineer\tproved\t1\t0\t-0.125\ndeep learning engineer\tproved\t3\t0\t0.2625\nmachine learning engineer\tproved\t35\t0\t22.911199300699295\nsoftware developer\tproved\t16\t0\t10.734797619047619\nsoftware embedded engineer\tproved\t40\t0\t14.092820378151258\nsoftware engineer\tproved\t33\t0\t6.655142857142858\ndata analyst\tsecured\t33\t0\t3.689927521008402\ndata architect\tsecured\t157\t0\t29.622055989761872\ndata engineer\tsecured\t2\t0\t0.02083333333333333\ndeep learning engineer\tsecured\t2\t0\t1.3541666666666663\nmachine learning engineer\tsecured\t31\t0\t4.380165750915752\nsoftware developer\tsecured\t5\t0\t1.7708333333333333\nsoftware embedded engineer\tsecured\t53\t0\t18.739961568986573\nsoftware engineer\tsecured\t42\t0\t9.896911588411589\ndata analyst\ttested\t36\t0\t3.702147283272283\ndata architect\ttested\t84\t0\t18.20293314446991\ndata engineer\ttested\t9\t0\t2.958333333333333\ndeep learning engineer\ttested\t1\t0\t0.0\nmachine learning engineer\ttested\t46\t0\t33.0703213420996\nsoftware developer\ttested\t43\t0\t9.409752136752138\nsoftware embedded engineer\ttested\t197\t0\t60.602429535333975\nsoftware engineer\ttested\t82\t0\t8.730065476190477\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1528959184054_-1484468227",
+      "id": "20180614-155304_34871894",
+      "dateCreated": "Jun 14, 2018 3:53:04 PM",
+      "dateStarted": "Jun 14, 2018 3:56:46 PM",
+      "dateFinished": "Jun 14, 2018 3:56:46 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%python\n",
+      "user": "anonymous",
+      "dateUpdated": "Jun 14, 2018 3:53:52 PM",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1528959232962_247948801",
+      "id": "20180614-155352_2096260887",
+      "dateCreated": "Jun 14, 2018 3:53:52 PM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "result",
+  "id": "2DGYMA1T2",
+  "angularObjects": {
+    "2DGMWT13B:shared_process": [],
+    "2DFR4X7Z3:shared_process": [],
+    "2DHVCZKAQ:shared_process": [],
+    "2DGP9W8UB:shared_process": [],
+    "2DHBWG1AU:shared_process": [],
+    "2DGGUDZKJ:shared_process": [],
+    "2DHHEPNTV:shared_process": [],
+    "2DF6B9S11:shared_process": [],
+    "2DG1XM6U5:shared_process": [],
+    "2DHGW87Q2:shared_process": [],
+    "2DGR592B1:shared_process": [],
+    "2DFBT2WRD:shared_process": [],
+    "2DH7MCFKM:shared_process": [],
+    "2DJKTRZNF:shared_process": [],
+    "2DH2VR3P1:shared_process": [],
+    "2DJQUUUQA:shared_process": [],
+    "2DGXWAT9J:shared_process": [],
+    "2DFG8UZS4:shared_process": [],
+    "2DHK3RUVS:shared_process": []
+  },
+  "config": {},
+  "info": {}
+}
